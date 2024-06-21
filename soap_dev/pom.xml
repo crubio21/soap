@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.soap</groupId>
     <artifactId>soap_dev</artifactId>
@@ -27,22 +27,19 @@
         <url/>
     </scm>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web-services</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -63,37 +60,19 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Important for class generator -->
-        <dependency>
-            <groupId>wsdl4j</groupId>
-            <artifactId>wsdl4j</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>1.6</version>
                 <executions>
                     <execution>
                         <id>xjc</id>
@@ -103,42 +82,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <sources>
-                        <source>src/main/resources/xsd/invoice.xsd</source>
-                    </sources>
-                    <packageName>com.soap.soap_dev.gen</packageName>
+                    <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.glassfish.jaxb</groupId>
-                        <artifactId>jaxb-xjc</artifactId>
-                        <version>4.0.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.sun.activation</groupId>
-                        <artifactId>jakarta.activation</artifactId>
-                        <version>1.2.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>jakarta.servlet</groupId>
-                        <artifactId>jakarta.servlet-api</artifactId>
-                        <version>4.0.1</version>
-                        <scope>compile</scope>
-                    </dependency>
-                </dependencies>
-
-
-                <!--
-<configuration>
- <schemaLanguage>XMLSCHEMA</schemaLanguage>
-                    <schemaDirectory>${project.basedir}/src/main/resources/xsd</schemaDirectory>
-                    <schemas>
-                        <schemaFiles>invoice.xsd</schemaFiles>
-                        <packageName>com.soap.soap_dev.gen</packageName>
-
-                    </schemas>
-                </configuration>-->
-
             </plugin>
         </plugins>
     </build>

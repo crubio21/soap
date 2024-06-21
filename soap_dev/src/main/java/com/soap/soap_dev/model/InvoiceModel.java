@@ -18,6 +18,4 @@ public class InvoiceModel {
     private String prefijo;
     private String tipoDocumento;
 
-
-
 }

@@ -1,10 +1,8 @@
 package com.soap.soap_dev.converter;
 
 
-import com.soap.soap_dev.gen.Invoice;
 import com.soap.soap_dev.model.InvoiceModel;
 import org.springframework.stereotype.Component;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +20,18 @@ public class InvoiceConverter {
         return invoiceModel;
     }
 
-    public Invoice convertInvoiceModelToInvoice(InvoiceModel InvoiceModel) {
+    public Invoice convertInvoiceModelToInvoice(InvoiceModel invoiceModel) {
         Invoice invoice = new Invoice();
-        invoice.setIdFacturador(InvoiceModel.getIdFacturador());
-        invoice.setCorreoCliente(InvoiceModel.getCorreoCliente());
-        invoice.setNumeroDocumento(InvoiceModel.getNumeroDocumento());
-        invoice.setPrefijo(InvoiceModel.getPrefijo());
-        invoice.setTipoDocumento(InvoiceModel.getTipoDocumento());
+        invoice.setIdFacturador(invoiceModel.getIdFacturador());
+        invoice.setCorreoCliente(invoiceModel.getCorreoCliente());
+        invoice.setNumeroDocumento(invoiceModel.getNumeroDocumento());
+        invoice.setPrefijo(invoiceModel.getPrefijo());
+        invoice.setTipoDocumento(invoiceModel.getTipoDocumento());
         return invoice;
     }
 
     public List<InvoiceModel> convertInvoicesToInvoiceModels(List<Invoice> invoices) {
-        List<InvoiceModel> invoiceModels = new ArrayList<InvoiceModel>();
+        List<InvoiceModel> invoiceModels = new ArrayList<>();
         for (Invoice invoice : invoices) {
             invoiceModels.add(convertInvoiceToInvoiceModel(invoice));
         }
@@ -41,7 +39,7 @@ public class InvoiceConverter {
     }
 
     public List<Invoice> convertInvoiceModelsToInvoices(List<InvoiceModel> InvoiceModels) {
-        List<Invoice> invoices = new ArrayList<Invoice>();
+        List<Invoice> invoices = new ArrayList<>();
         for (InvoiceModel InvoiceModel : InvoiceModels) {
             invoices.add(convertInvoiceModelToInvoice(InvoiceModel));
         }

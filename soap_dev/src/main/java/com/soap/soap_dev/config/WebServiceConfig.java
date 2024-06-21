@@ -14,30 +14,43 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @EnableWs
 @Configuration
-public class WebServiceConfig extends WsConfigurerAdapter {
+public class WebServiceConfig  extends WsConfigurerAdapter{
 
     @Bean
-    public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
+    public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext context) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
-        servlet.setApplicationContext(applicationContext);
+        servlet.setApplicationContext(context);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean(servlet, "/ws/*");
-    }
-
-
-    @Bean(name = "invoices")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema productsSchema) {
-        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("invoicePort");
-        wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://www.soap.com/soap_dev/gen");
-        wsdl11Definition.setSchema(productsSchema);
-        return wsdl11Definition;
+        return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
 
     @Bean
-    public XsdSchema productsSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("xsd/invoice.xsd"));
+    public XsdSchema invoiceSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("invoice.xsd"));
     }
+    @Bean
+    public XsdSchema zipSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("zip.xsd"));
+    }
+
+    @Bean
+    public DefaultWsdl11Definition defaultInvoiceWsdl11Definition(XsdSchema invoiceSchema) {
+        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
+        definition.setSchema(invoiceSchema);
+        definition.setLocationUri("/ws");
+        definition.setPortTypeName("InvoicesPort");
+        definition.setTargetNamespace("http://www.example.com/demosoap/gen");
+        return definition;
+    }
+    @Bean
+    public DefaultWsdl11Definition defaultZipWsdl11Definition(XsdSchema zipSchema) {
+        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
+        definition.setSchema(zipSchema);
+        definition.setLocationUri("/ws");
+        definition.setPortTypeName("ZipPort");
+        definition.setTargetNamespace("http://www.example.com/demosoap/zip");
+        return definition;
+    }
+
 
 }
