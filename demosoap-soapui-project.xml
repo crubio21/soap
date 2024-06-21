@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="9ec8f3c4-5c54-4952-a379-509f7cb1d449" activeEnvironment="Default" name="soap_dev" resourceRoot="" soapui-version="5.7.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="2884f730-fac1-4a03-bed8-2d69fb8d3ffc" wsaVersion="NONE" name="invoicePortSoap11" type="wsdl" bindingName="{http://www.example.com/demosoap/gen}invoicePortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/ws/invoices.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/ws/invoices.wsdl"><con:part><con:url>http://localhost:8080/ws/invoices.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://www.example.com/demosoap/gen" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.example.com/demosoap/gen" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.com/demosoap/gen">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://www.soap.com/soap_dev/gen" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <!--Find All-->
+      <xs:element name="getInvoicesRequest">
+        <xs:complexType>
+          <xs:sequence></xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoicesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="Invoices" type="tns:Invoice"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!--Find by name-->
+      <xs:element name="getInvoiceRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Invoice" type="tns:invoice"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!--Save-->
+      <xs:element name="postInvoiceRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoice" type="tns:invoice"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="postInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoice" type="tns:invoice"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="invoice">
+        <xs:sequence>
+          <xs:element name="id" type="xs:int"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="price" type="xs:double"/>
+          <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getInvoiceRequest">
+    <wsdl:part element="tns:getInvoiceRequest" name="getInvoiceRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getInvoicesResponse">
+    <wsdl:part element="tns:getInvoicesResponse" name="getInvoicesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="postInvoiceRequest">
+    <wsdl:part element="tns:postInvoiceRequest" name="postInvoiceRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="postInvoiceResponse">
+    <wsdl:part element="tns:postInvoiceResponse" name="postInvoiceResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getInvoiceResponse">
+    <wsdl:part element="tns:getInvoiceResponse" name="getInvoiceResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getInvoicesRequest">
+    <wsdl:part element="tns:getInvoicesRequest" name="getInvoicesRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="InvoicePort">
+    <wsdl:operation name="getInvoice">
+      <wsdl:input message="tns:getInvoiceRequest" name="getInvoiceRequest"></wsdl:input>
+      <wsdl:output message="tns:getInvoiceResponse" name="getInvoiceResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoices">
+      <wsdl:input message="tns:getInvoicesRequest" name="getInvoicesRequest"></wsdl:input>
+      <wsdl:output message="tns:getInvoicesResponse" name="getInvoicesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postInvoice">
+      <wsdl:input message="tns:postInvoiceRequest" name="postInvoiceRequest"></wsdl:input>
+      <wsdl:output message="tns:postInvoiceResponse" name="postInvoiceResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InvoicePortSoap11" type="tns:InvoicePort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getInvoice">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getInvoiceRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getInvoiceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoices">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getInvoicesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getInvoicesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postInvoice">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="postInvoiceRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="postInvoiceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="invoicePortService">
+    <wsdl:port binding="tns:invoicePortSoap11" name="invoicePortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/ws</con:endpoint></con:endpoints><con:operation id="eb102b71-d03c-4898-b203-a3627867e5b5" isOneWay="false" action="" name="getInvoice" bindingOperationName="getInvoice" type="Request-Response" outputName="getInvoiceResponse" inputName="getInvoiceRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="34bbd6d7-a144-424f-af50-264d2f62b9a3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gen="http://www.example.com/demosoap/gen">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <gen:getInvoiceRequest>\r
+         <gen:idFacturador>1017257462</gen:idFacturador>\r
+      </gen:getInvoiceRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.soap.com/soap_dev/gen/invoicePort/getInvoiceRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="20e7da70-1cb8-4502-9c6f-6a80aa72d4e7" isOneWay="false" action="" name="getInvoices" bindingOperationName="getInvoices" type="Request-Response" outputName="getInvoicesResponse" inputName="getInvoicesRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="76846fb8-abf3-46e0-b6fe-a199e23f0b77" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gen="http://www.example.com/demosoap/gen">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <gen:getInvoicesRequest/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.soap.com/soap_dev/gen/invoicePort/getInvoicesRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4d4ed39d-8313-4403-81ed-587bfcf9060e" isOneWay="false" action="" name="postInvoice" bindingOperationName="postInvoice" type="Request-Response" outputName="postInvoiceResponse" inputName="postInvoiceRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5f64aa2a-41f3-4e01-8e2a-d849c9a73e2d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gen="http://www.example.com/demosoap/gen">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <gen:postInvoiceRequest>\r
+         <gen:invoice>\r
+            <gen:correoCliente>crubioa@loggro.com</gen:correoCliente>\r
+            <gen:numeroDocumento>12345</gen:numeroDocumento>\r
+            <gen:prefijo>000213</gen:prefijo>\r
+            <gen:tipoDocumento>Nit</gen:tipoDocumento>\r
+         </gen:invoice>\r
+      </gen:postInvoiceRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.example.com/demosoap/gen/invoicePort/postInvoiceRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
